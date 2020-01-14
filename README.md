@@ -1,10 +1,10 @@
-# Eksi Sözlük Entries -- Selenium (Development in progress.)
+## Eksi Sözlük Entries -- Selenium (Development in progress.)
 
-## Dependencies
+### Dependencies
 
 `pip install selenium`
 
-## Enviroments
+### Enviroments
 Also you have to install the web driver at least one of these. 
 (Document Page Go To --> 1.3 Drivers)
 
