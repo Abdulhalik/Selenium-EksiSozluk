@@ -1,6 +1,6 @@
+from selenium import webdriver
 import time
 import random
-from selenium import webdriver
 
 browser = webdriver.Chrome('/Users/abdulhalik/PycharmProjects/Selenium-EksiSozlukEntries/venv/chromedriver')
 URL = "https://eksisozluk.com/fatih-sultan-mehmet--42269?p="
@@ -8,10 +8,12 @@ URL = "https://eksisozluk.com/fatih-sultan-mehmet--42269?p="
 pageCount = 1
 entryCount = 1
 entries = []
-
-# Generate random pages until 10 and browse them every 3 seconds -- 10 sayfa olana kadar 3 saniyede bir rastgele sayfa üret
+randomPages = []
+# Generate random pages until 10 and browse them every 3 seconds
+# -- 10 sayfa olana kadar 3 saniyede bir rastgele sayfa üret
 while pageCount <= 10:
     randomPage = random.randint(1, 65)
+    randomPages.append(randomPage)
     # Add random page number to end of the url
     # -- URL'in sonuna rastgele üretilmiş sayfa numarası ekle
     newUrl = URL + str(randomPage)
@@ -27,10 +29,18 @@ while pageCount <= 10:
     time.sleep(3)
     pageCount += 1
 
-# Print all entries in list
-for entry in entries:
-    print(str(entryCount) + "**************************************************")
-    print(entry)
-    entryCount += 1
+pageCount = 1
+
+# Write all entries into the Txt File
+with open("entries.txt", "w", encoding= "UTF-8") as file:
+    file.write("EKSI SOZLUK - SOME ENTRIES ABOUT FATIH SULTAN MEHMED HAN \n")
+    file.write("Generated Pages: ")
+    for pageNumber in randomPages:
+        file.write(str(pageNumber) + " - ")
+    file.write("\n------------------------------------------------------\n")
+    for entry in entries:
+        file.write(str(pageCount) + ".\n" + entry + "\n")
+        file.write("************************************\n")
+        pageCount += 1
 
 browser.close()
